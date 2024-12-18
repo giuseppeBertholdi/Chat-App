@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Mensagens</title>
+    <style>
+        /* Resetando margens e padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Fundo da página */
+        body {
+            font-style: italic;
+            background: linear-gradient(135deg, #6a1b9a, #2575fc); /* Fundo com gradiente */
+            color: #dcd8e4;
+            font-weight: bold;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Contêiner principal */
+        #formulario-simplificado {
+            background: linear-gradient(145deg, #2d2f50, #1c1e3b);
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: space-between;
+        }
+
+        /* Título */
+        #titulo-sala {
+            font-weight: bold;
+            text-align: center;
+            color: #a8a0f2;
+            font-size: 32px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        /* Seções do formulário */
+        .form-section {
+            flex: 1 1 45%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            background-color: #23244a;
+            border-radius: 12px;
+            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .form-section h2 {
+            color: #c3bffa;
+            font-size: 24px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #6c63ff;
+            padding-bottom: 5px;
+        }
+
+        /* Campos de entrada */
+        .input-campo {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #5e507b;
+            border-radius: 8px;
+            background-color: #3c3f5a;
+            color: #dcd8e4;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .input-campo:focus {
+            border-color: #9e7bfa;
+            background-color: #4a4c6b;
+            outline: none;
+            transform: scale(1.02);
+        }
+
+        /* Botões */
+            .botoes-formulario {
+        background-color: #7a62b7;
+        margin-bottom: 25px; /* Mantém a margem inferior */
+        margin-top: 20px; /* Adiciona uma margem superior */
+        color: #ffffff;
+        padding: 16px;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+
+        /* Layout do contêiner dos botões */
+        .div-botoes {
+            display: flex;
+            flex-direction: column;
+            gap: 40px; /* Espaçamento entre os botões */
+            margin-top: 10px; /* Margem superior geral */
+            width: 100%;
+        }
+
+        .form-section:nth-child(2) .botoes-formulario {
+    margin-top: 20px;
+}
+
+
+        .botoes-formulario:hover {
+            background-color: #6a53a5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .criar-sala-btn {
+            background-color: #9b75e0;
+        }
+
+        .criar-sala-btn:hover {
+            background-color: #8561c2;
+        }
+
+        /* Mensagens de erro */
+        .mensagens-erro {
+            color: #f36e6e;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Labels */
+        label {
+            color: #c9c9d6;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        /* Área de exibição de mensagens */
+        .message-display {
+            flex: 1 1 100%;
+            background-color: #23244a;
+            border-radius: 12px;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 200px;
+            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .message-display ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .message-display li {
+            margin-bottom: 15px;
+            color: #dcd8e4;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #2a2d46;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Botão de ação geral */
+        .action-button {
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .action-button button {
+            background-color: #8561c2;
+            color: #ffffff;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .action-button button:hover {
+            background-color: #6f4fb0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div id="formulario-simplificado">
+        <h1 id="titulo-sala">Sistema de Mensagens Privadas</h1>
+
+        <!-- Envio de mensagens -->
+        <div class="form-section">
+            <h2>Enviar Nova Mensagem</h2>
+            <form action="/send_message" method="POST">
+                <label for="sender">Seu Nome:</label>
+                <input type="text" id="sender" name="sender" 
+                       value="{{ session.get('username', '') }}" 
+                       readonly class="input-campo">
+
+                <label for="receiver">Destinatário:</label>
+                <input type="text" id="receiver" name="receiver" required class="input-campo">
+
+                <label for="content">Mensagem:</label>
+                <textarea id="content" name="content" required class="input-campo"></textarea>
+                <div class="div-botoes">
+                    <button type="submit" class="botoes-formulario">Enviar Mensagem</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Busca de mensagens -->
+        <div class="form-section">
+            <h2>Buscar Mensagens</h2>
+            <form action="/search_messages" method="GET">
+                <label for="user">Digite o Nome do Usuário:</label>
+                <input type="text" id="user" name="user" required class="input-campo">
+                <div class="div-botoes">
+                    <button type="submit" class="botoes-formulario">Buscar</button>
+                </div>
+            </form>
+
+            {% if user %}
+            <div class="message-display">
+                <h2>Mensagens de "{{ user }}"</h2>
+                <ul>
+                    {% for message in messages %}
+                        <li>
+                            <strong>De: {{ message[1] }} Para: {{ message[2] }}</strong><br>
+                            {{ message[3] }}
+                        </li>
+                    {% else %}
+                        <li>Nenhuma mensagem encontrada para "{{ user }}".</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Botão Ver Todas -->
+        <div class="action-button">
+            <button onclick="window.location.href='/oldMessages'">Ver Todas as Mensagens</button>
+        </div>
+    </div>
+</body>
+</html>

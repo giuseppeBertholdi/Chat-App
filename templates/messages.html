@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'Mensagens de ' + user if user else 'Todas as Mensagens' }}</title>
+</head>
+<body>
+    <h1>{{ 'Mensagens de ' + user if user else 'Todas as Mensagens' }}</h1>
+    <a href="/">Voltar</a><br><br>
+
+    <ul>
+        {% for message in messages %}
+            <li>
+                <strong>Enviado por: {{ message[1] }} para {{ message[2] }}</strong><br>
+                Mensagem: {{ message[3] }}<br>
+                <small>Data: {{ message[4] }}</small>
+            </li>
+        {% else %}
+            <p>Nenhuma mensagem encontrada.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todas as Mensagens</title>
+    <style>
+        /* Resetando margens e padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Fundo da página */
+        body {
+            background: linear-gradient(135deg, #6a1b9a, #2575fc); /* Fundo com gradiente */
+            color: #dcd8e4;
+            font-weight: bold;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Contêiner principal */
+        .container {
+            background: linear-gradient(145deg, #2d2f50, #1c1e3b);
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Título */
+        h1 {
+            text-align: center;
+            color: #a8a0f2;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* Lista de mensagens */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #23244a;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        ul li strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #c3bffa;
+            font-size: 16px;
+        }
+
+        /* Mensagem de erro */
+        .no-messages {
+            text-align: center;
+            color: #f36e6e;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Todas as Mensagens</h1>
+        <ul>
+            {% for message in all_messages %}
+                <li>
+                    <strong>Enviado por: {{ message[1] }} para {{ message[2] }}</strong>
+                    Mensagem: {{ message[3] }}
+                </li>
+            {% else %}
+                <p class="no-messages">Nenhuma mensagem encontrada.</p>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

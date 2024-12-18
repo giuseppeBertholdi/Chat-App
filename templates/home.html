@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="form-container">
+  <form method="POST" class="formulario">
+    <div class="titulo-sala">
+    <h1>Talking Away</h1>
+    </div>
+    <!-- Nome carregado automaticamente da sessão -->
+    <div class="input-group">
+      <label for="name">Nome:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value="{{ name }}"
+        readonly  
+        class="input-campo"
+      />
+    </div>
+
+    <!-- Código da Sala -->
+    <div class="input-group">
+      <label for="code">Código da Sala:</label>
+      <input
+        type="text"
+        id="code"
+        placeholder="Código da Sala"
+        name="code"
+        class="input-campo"
+      />
+    </div>
+
+    <!-- Botão para entrar na sala -->
+    <div class="botao-container">
+      <button type="submit" name="join" value="True" class="botoes-formulario">Entrar em uma Sala</button>
+    </div>
+
+    <!-- Botão para criar uma nova sala -->
+    <div class="botao-container">
+      <button type="submit" name="create" value="True" class="botoes-formulario criar-sala-btn">Criar uma Sala</button>
+    </div>
+
+    <!-- Exibe mensagens de erro -->
+    {% if error %}
+    <div class="mensagens-erro">
+      <ul>
+        <li>{{ error }}</li>
+      </ul>
+    </div>
+    {% endif %}
+  </form>
+</div>
+{% endblock %}
